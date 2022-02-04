@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 @Entity
@@ -28,15 +31,31 @@ public class User {
     private String nome;
 
     @NotBlank
+    @Email
+    @Schema
     private String usuario;
 
     @NotBlank
-    @Size (min = 5, max = 50)
     private String senha;
 
     @OneToMany(mappedBy =  "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario")
     private List<Postagem> postagem;
+
+
+    public User(long id, String nome, String usuario, String senha, String foto) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.foto = foto;
+    }
+
+
+    public User() {
+    }
+
+
 
     private String foto;
     
