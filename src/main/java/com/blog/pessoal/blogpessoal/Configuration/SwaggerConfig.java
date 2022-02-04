@@ -26,7 +26,7 @@ public class SwaggerConfig {
 					.name("Generation Brasil")
 					.url("http://springdoc.org"))
 				.contact(new Contact()
-					.name("Jessica Curti")
+					.name("Karolyne Corol")
 					.url("https://github.com/karolynecorol")
 					.email("karolyne.corol@gmail.com")))
 				.externalDocs(new ExternalDocumentation()
