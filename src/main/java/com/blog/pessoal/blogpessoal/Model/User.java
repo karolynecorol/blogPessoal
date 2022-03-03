@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,27 +38,42 @@ public class User {
     @NotBlank
     private String senha;
 
+    private String tipo;
+
+    @Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
+    private String foto;
+
+    
     @OneToMany(mappedBy =  "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario")
     private List<Postagem> postagem;
 
+    public String getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Postagem> getPostagem() {
+        return this.postagem;
+    }
+
+    public void setPostagem(List<Postagem> postagem) {
+        this.postagem = postagem;
+    }
 
     public User(long id, String nome, String usuario, String senha, String foto) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
-        this.foto = foto;
     }
-
 
     public User() {
     }
 
-
-
-    private String foto;
-    
     public long getId() {
         return this.id;
     }
@@ -98,4 +113,5 @@ public class User {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
 }

@@ -37,13 +37,22 @@ public class UsuarioService {
 				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(encodedAuth);
-		
+				
 				user.get().setToken(authHeader);
-				user.get().setNome(usuario.get().getNome());
+				user.get().setId(user.get().getId());
+				user.get().setNome(user.get().getNome());
+				user.get().setFoto(user.get().getFoto());
+				user.get().setToken(generatorBasicToken(user.get().getUsuario(),user.get().getSenha()));
+				user.get().setSenha(user.get().getSenha());
+				user.get().setTipo(user.get().getTipo());
 				
 				return user;
 			}
 		}
+		return null;
+	}
+
+	private String generatorBasicToken(String usuario, String senha) {
 		return null;
 	}
 	
